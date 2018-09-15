@@ -11,15 +11,15 @@ export class StringProcessor implements IStringProcessor {
   private constructor() {};
   private static _instance: StringProcessor = null;
 
-  toLowerCase(s: string): string {
+  async toLowerCase(s: string): Promise<string> {
     return s.toLowerCase();
   }
-  
-  trim(s: string): string {
+
+  async trim(s: string): Promise<string> {
     return s.trim();
   }
 
-  parseDouble(s: string): number {
+  async parseDouble(s: string): Promise<number> {
     return Number(s);
   }
 }

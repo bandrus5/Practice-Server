@@ -4,10 +4,11 @@ const HandlerBase_1 = require("./HandlerBase");
 class TrimHandler extends HandlerBase_1.HandlerBase {
     handle(req, res) {
         let input = req.headers['input'];
-        let result = this.stringProcessor.trim(input);
-        let formattedResult = this.serializer.serializeResults(true, result);
-        res.status(200).send({
-            result: formattedResult
+        this.stringProcessor.trim(input).then(result => {
+            let formattedResult = this.serializer.serializeResults(true, result);
+            res.status(200).send({
+                result: formattedResult
+            });
         });
     }
 }

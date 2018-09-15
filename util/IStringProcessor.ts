@@ -1,5 +1,5 @@
 export interface IStringProcessor {
-  toLowerCase(s: string): string;
-  trim(s: string): string;
-  parseDouble(s: string): number;
+  toLowerCase(s: string): Promise<string>;
+  trim(s: string): Promise<string>;
+  parseDouble(s: string): Promise<number|string>;
 }

@@ -4,17 +4,7 @@ export class Results {
     this.changedString = changedString;
     this.errorInfo = errorInfo;
   }
-  private success: boolean;
-  private changedString: string;
-  private errorInfo: string;
-
-  public getSuccess(): boolean {
-    return this.success;
-  }
-  public getChangedString(): string {
-    return this.changedString;
-  }
-  public getErrorInfo(): string {
-    return this.errorInfo;
-  }
+  public success: boolean;
+  public changedString: string;
+  public errorInfo: string;
 }
