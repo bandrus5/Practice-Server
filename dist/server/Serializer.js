@@ -11,10 +11,10 @@ class Serializer {
     }
     serializeResults(success, newString) {
         if (success) {
-            return new Results_1.Results(false, "None", "The requested operation could not be performed.");
+            return new Results_1.Results(true, newString, "None");
         }
         else {
-            return new Results_1.Results(true, newString, "None");
+            return new Results_1.Results(false, "None", "The requested operation could not be performed.");
         }
     }
 }

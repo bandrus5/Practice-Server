@@ -12,10 +12,10 @@ export class Serializer {
 
   public serializeResults(success: boolean, newString: string): Results {
     if (success) {
-      return new Results(false, "None", "The requested operation could not be performed.")
+      return new Results(true, newString, "None");
     }
     else {
-      return new Results(true, newString, "None");
+      return new Results(false, "None", "The requested operation could not be performed.");
     }
   }
 }
