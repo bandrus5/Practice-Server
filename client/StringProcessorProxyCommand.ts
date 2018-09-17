@@ -1,22 +1,25 @@
 import {IStringProcessor} from '../util/IStringProcessor';
 import {ClientCommunicator} from './ClientCommunicator';
 import { Results } from '../util/Results';
+import { CommandData } from '../util/CommandData';
+import { CommandType } from '../util/CommandType';
 
-export class StringProcessorProxy implements IStringProcessor {
+export class StringProcessorProxyCommand implements IStringProcessor {
   public static getInstance() {
-    if (StringProcessorProxy._instance == null) {
-      StringProcessorProxy._instance = new StringProcessorProxy();
+    if (StringProcessorProxyCommand._instance == null) {
+      StringProcessorProxyCommand._instance = new StringProcessorProxyCommand();
     }
-    return StringProcessorProxy._instance;
+    return StringProcessorProxyCommand._instance;
   }
   private constructor() {
     this.communicator = ClientCommunicator.getInstance();
-  }
-  private static _instance: StringProcessorProxy = null;
+  };
+  private static _instance: StringProcessorProxyCommand = null;
 
   private communicator: ClientCommunicator;
   async toLowerCase(s: string): Promise<string> {
-    let results: Results = await this.communicator.send(s, 'tolowercase');
+    let data = new CommandData(CommandType.ToLower, s)
+    let results: Results = await this.communicator.sendCommand(data);
     if (results.success) {
       return results.changedString;
     }
@@ -25,7 +28,8 @@ export class StringProcessorProxy implements IStringProcessor {
     }
   }
   async trim(s: string): Promise<string> {
-    let results: Results = await this.communicator.send(s, 'trim') as Results;
+    let data = new CommandData(CommandType.Trim, s);
+    let results: Results = await this.communicator.sendCommand(data) as Results;
     if (results.success) {
       return results.changedString;
     }
@@ -34,7 +38,8 @@ export class StringProcessorProxy implements IStringProcessor {
     }
   }
   async parseDouble(s: string): Promise<number|string> {
-    let results: Results = await this.communicator.send(s, 'parseDouble');
+    let data = new CommandData(CommandType.ParseDouble, s);
+    let results: Results = await this.communicator.sendCommand(data);
     if (results.success) {
       return Number(results.changedString);
     }
